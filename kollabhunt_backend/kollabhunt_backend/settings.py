@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET")
-print("secret key =", SECRET_KEY, "tyepe =", type(SECRET_KEY))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,9 +78,7 @@ WSGI_APPLICATION = 'kollabhunt_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-print(os.environ.get('DATABASE'))
 DATABASES = json.loads(os.environ.get('DATABASE'))
-print("Database=", DATABASES, "type=", type(DATABASES))
 
 
 # Password validation
