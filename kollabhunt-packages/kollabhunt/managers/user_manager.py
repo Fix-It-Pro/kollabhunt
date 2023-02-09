@@ -15,10 +15,30 @@ class UserManager(BaseUserManager):
             username=username,
             firstname=kwargs.get('firstname', ''),
             lastname=kwargs.get('lastname', ''),
-            is_admin=kwargs.get('is_admin', ''),
-            is_superuser=kwargs.get('is_superuser', ''),
-            is_stuff=kwargs.get('is_stuff', ''),
+            is_admin=False,
+            is_superuser=False,
+            is_stuff=kwargs.get('is_stuff', False),
         )
-        user.set_password()
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_superuser(self, email, username, password, **kwargs):
+        if not email:
+            raise ValueError("Email not provided")
+        if not username:
+            raise ValueError("Username not provided")
+        if not password:
+            raise ValueError("Password not provided")
+
+        user = self.model(
+            email=self.normalize_email(email),
+            username=username,
+            firstname=kwargs.get('firstname', ''),
+            lastname=kwargs.get('lastname', ''),
+            is_admin=True,
+            is_superuser=True,
+            is_stuff=kwargs.get('is_stuff', False),
+        )
+        user.set_password(password)
         user.save(using=self._db)
         return user
