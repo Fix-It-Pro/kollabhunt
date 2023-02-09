@@ -15,7 +15,6 @@ from dotenv import load_dotenv
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 env_file_path = os.path.join(BASE_DIR, '.env')
-print("env path = ", env_file_path)
 load_dotenv(dotenv_path=env_file_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +37,10 @@ ALLOWED_HOSTS = ['*']
 
 CUSTOM_APPS= [
     'kollabhunt.apps.DomainConfig',
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework'
 ]
 
 INSTALLED_APPS = [
@@ -126,3 +129,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'kollabhunt.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
