@@ -156,9 +156,9 @@ SWAGGER_SETTINGS = {
 
 # socal auth
 # by default set random url
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
 
 
 
