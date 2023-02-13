@@ -18,6 +18,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    url(r'^kollabhunt/v1/api/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^kollabhunt/v1/docs/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
+    url(r'^kollabhunt/v1/api(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='kollabhunt-api-json'),
+    url(r'^kollabhunt/v1/api/$', schema_view.with_ui('swagger', cache_timeout=0), name='kollabhunt-swagger-ui'),
+    url(r'^kollabhunt/v1/docs/$', schema_view.with_ui('redoc', cache_timeout=0), name='kollabhunt-api-redoc')
 ]
