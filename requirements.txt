@@ -13,3 +13,5 @@ python-dotenv==0.21.1
 python-openid==2.2.5
 pytz==2022.7.1
 sqlparse==0.4.3
+social-auth-app-django~=5.0.0
+drf-yasg~=1.21.5

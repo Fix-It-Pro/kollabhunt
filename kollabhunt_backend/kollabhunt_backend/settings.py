@@ -36,8 +36,12 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-CUSTOM_APPS= [
+CUSTOM_APPS = [
     'kollabhunt.apps.DomainConfig',
+]
+
+THIRD_PARTY_APP = [
+    'drf_yasg'
 ]
 
 INSTALLED_APPS = [
@@ -47,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + CUSTOM_APPS
+] + THIRD_PARTY_APP + CUSTOM_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,3 +130,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'kollabhunt.User'
+
+# socal auth
+
+
+
