@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
             lastname=kwargs.get('lastname', ''),
             is_admin=True,
             is_superuser=True,
-            is_stuff=kwargs.get('is_stuff', False),
+            is_stuff=kwargs.get('is_stuff', True),
         )
         user.set_password(password)
         user.save(using=self._db)
