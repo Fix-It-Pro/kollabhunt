@@ -35,11 +35,13 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-CUSTOM_APPS= [
+CUSTOM_APPS = [
     'kollabhunt.apps.DomainConfig',
 ]
 
-THIRD_PARTY_APPS = [
+THIRD_PARTY_APP = [
+    'drf_yasg',
+    'social_django',
     'rest_framework'
 ]
 
@@ -50,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + CUSTOM_APPS
+] + THIRD_PARTY_APP + CUSTOM_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,6 +80,23 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
 ]
 
 WSGI_APPLICATION = 'kollabhunt_backend.wsgi.application'
@@ -130,8 +149,21 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'kollabhunt.User'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+# swagger
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
 }
+
+# socal auth
+# by default set random url
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
+
+
+
+
+
+
+
+
