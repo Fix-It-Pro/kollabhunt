@@ -10,7 +10,7 @@ class User(AbstractBaseUser):
     lastname = models.CharField(max_length=50, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_stuff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
