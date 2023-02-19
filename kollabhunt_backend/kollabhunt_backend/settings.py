@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 CUSTOM_APPS = [
     'kollabhunt.apps.DomainConfig',
+    'kollabauth.apps.KollabauthConfig',
 ]
 
 THIRD_PARTY_APP = [
@@ -62,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'kollabhunt_backend.urls'
@@ -77,6 +80,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -154,6 +160,8 @@ SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
 }
 
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_CLIENT_ID')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_CLIENT_SECRETS')
 # socal auth
 # by default set random url
 # LOGIN_URL = 'login'
