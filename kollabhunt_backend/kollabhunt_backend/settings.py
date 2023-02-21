@@ -101,7 +101,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.google.GoogleOAuth2',
+    'kollabauth.backends.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
 ]
 
@@ -154,6 +154,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'kollabhunt.User'
+USER_FIELDS=['email','firstname', 'lastname', 'username']
 
 # swagger
 SWAGGER_SETTINGS = {
@@ -162,6 +163,8 @@ SWAGGER_SETTINGS = {
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_CLIENT_ID')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_CLIENT_SECRETS')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_CLIENT_SECRETS')
 # socal auth
 # by default set random url
 # LOGIN_URL = 'login'

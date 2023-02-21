@@ -2,13 +2,11 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, password, **kwargs):
+    def create_user(self, email, username, password=None, **kwargs):
         if not email:
             raise ValueError("Email not provided")
         if not username:
             raise ValueError("Username not provided")
-        if not password:
-            raise ValueError("Password not provided")
 
         user = self.model(
             email=self.normalize_email(email),
