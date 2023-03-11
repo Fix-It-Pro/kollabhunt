@@ -1,38 +1,29 @@
 import json
-from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
-from social_core.utils import user_is_authenticated
-from django.views.decorators.cache import never_cache
+import os
+from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
-from social_core.utils import user_is_authenticated
-from social_django.utils import psa
-from social_django.views import _do_login, NAMESPACE
-from django.contrib.auth import logout as log_out
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+
 
 UserModel = get_user_model()
 
 
-def do_complete(backend, login, user=None, redirect_name='next',
-                *args, **kwargs):
-    data = backend.strategy.request_data()
-
-    is_authenticated = user_is_authenticated(user)
-    user = user if is_authenticated else None
-    auth_details = backend.complete(user=user, *args, **kwargs).auth_details
-    request = backend.strategy.request
-    email = auth_details.get("email", None)
-
-    payload = {
-        "auth_uid": auth_details.get("user_id", None),
-        "email": email.lower() if email else ''
-    }
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    # callback_url = CALLBACK_URL_YOU_SET_ON_GOOGLE
+    client_class = OAuth2Client
 
 
-@never_cache
+class GithubLogin(SocialLoginView):
+    adapter_class = GitHubOAuth2Adapter
+    callback_url = os.environ.get('GITHUB_CALLBACK'),
+    client_class = OAuth2Client
+
+
 @csrf_exempt
-@psa()
-def complete(request, backend, *args, **kwargs):
-    """Authentication complete view"""
-
-    return do_complete(request.backend, _do_login, user=request.user,
-                       redirect_name=REDIRECT_FIELD_NAME, request=request,
-                       *args, **kwargs)
+def github_callback(request):
+    a=1
+    bc=3

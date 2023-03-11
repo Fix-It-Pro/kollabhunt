@@ -1,9 +1,11 @@
 from django.urls import path, include, re_path
-from .views import complete
-from social_django.urls import extra
+from .views import GoogleLogin, GithubLogin, github_callback
+
 
 urlpatterns = [
-    path('', include('social_django.urls', namespace='social')),
-    re_path(r'^auth-complete/(?P<backend>[^/]+){0}$'.format(extra), complete,
-            name='auth-complete')
+    path('', include('dj_rest_auth.urls')),
+    path('registration/', include('dj_rest_auth.registration.urls')),
+    path('google/', GoogleLogin.as_view(), name='google_login'),
+    path('github/', GithubLogin.as_view(), name='github_login'),
+    path('github/callback/', github_callback, name='github_callback'),
 ]
