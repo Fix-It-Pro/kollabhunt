@@ -189,7 +189,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "SCOPE": [
             "read:user",
         ],
-        "VERIFIED_EMAIL": False
+        "VERIFIED_EMAIL": True
     },
     "google": {
         "APP": {
