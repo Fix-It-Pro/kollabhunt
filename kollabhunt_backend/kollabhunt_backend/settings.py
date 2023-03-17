@@ -188,7 +188,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "SCOPE": [
             "read:user",
         ],
-        "VERIFIED_EMAIL": False
+        "VERIFIED_EMAIL": True
     },
     "google_auth": {
         'adapter': 'kollabauth.adapters.KollabGoogleOAuth2Adapter',
