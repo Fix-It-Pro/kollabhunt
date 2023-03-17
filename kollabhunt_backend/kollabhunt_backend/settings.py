@@ -48,9 +48,7 @@ THIRD_PARTY_APP = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
+    'dj_rest_auth.registration'
 ]
 
 INSTALLED_APPS = [
@@ -180,7 +178,8 @@ SWAGGER_SETTINGS = {
 # LOGIN_REDIRECT_URL = 'home'
 
 SOCIALACCOUNT_PROVIDERS = {
-    "github": {
+    "github_auth": {
+        'adapter': 'kollabauth.adapters.KollabGithubOAuth2Adapter',
         "APP": {
             "client_id": os.environ.get('GITHUB_CLIENT_ID'),
             "secret": os.environ.get('GITHUB_CLIENT_SECRETS'),
@@ -191,11 +190,11 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         "VERIFIED_EMAIL": False
     },
-    "google": {
+    "google_auth": {
+        'adapter': 'kollabauth.adapters.KollabGoogleOAuth2Adapter',
         "APP": {
-            "client_id": "123",
-            "secret": "456",
-            "key": ""
+            "client_id": os.environ.get('GOOGLE_CLIENT_ID'),
+            "secret": os.environ.get('GOOGLE_CLIENT_SECRETS')
         },
         "SCOPE": [
             "profile",
@@ -207,7 +206,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+REST_AUTH_SOCIAL_LOGIN_PROVIDERS = {
+    'google': 'kollabauth.provider.KollabGoogleProvider',
+}
 
+SOCIALACCOUNT_ADAPTER = 'kollabauth.adapters.KollabSocialAccountAdapter'
 
 
 
