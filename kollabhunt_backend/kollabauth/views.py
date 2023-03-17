@@ -24,7 +24,7 @@ class GoogleLogin(SocialLoginView):
 
 class GithubLogin(SocialLoginView):
     adapter_class = KollabGithubOAuth2Adapter
-    callback_url = os.environ.get('GITHUB_CALLBACK'),
+    callback_url = 'http://127.0.0.1:8000/auth/callback/github/'
     client_class = OAuth2Client
 
 
@@ -42,6 +42,12 @@ class AuthCallback(object):
             data['code'] = self.request.GET.get('code')
         if self.request.GET.get('access_token'):
             data['access_token'] = self.request.GET.get('access_token')
+        return data
+
+    def github_payload(self):
+        data = dict()
+        if self.request.GET.get('code'):
+            data['code'] = self.request.GET.get('code')
         return data
 
     def execute(self):
