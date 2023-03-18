@@ -12,8 +12,6 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from .adapters import KollabGoogleOAuth2Adapter, KollabGithubOAuth2Adapter
 import requests
 
-
-
 UserModel = get_user_model()
 
 
