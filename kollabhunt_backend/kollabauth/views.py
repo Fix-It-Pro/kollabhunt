@@ -58,7 +58,7 @@ class AuthCallback(object):
 
 def callback(request, provider):
     response = AuthCallback(request, provider).execute()
-    return response
+    return JsonResponse(response.json())
 
 
 

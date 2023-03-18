@@ -96,6 +96,7 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication'
@@ -208,6 +209,10 @@ SOCIALACCOUNT_PROVIDERS = {
 
 REST_AUTH_SOCIAL_LOGIN_PROVIDERS = {
     'google': 'kollabauth.provider.KollabGoogleProvider',
+}
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_HTTPONLY': False
 }
 
 SOCIALACCOUNT_ADAPTER = 'kollabauth.adapters.KollabSocialAccountAdapter'
