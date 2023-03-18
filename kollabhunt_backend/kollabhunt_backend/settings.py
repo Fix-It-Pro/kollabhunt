@@ -69,8 +69,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'kollabhunt_backend.urls'
@@ -87,8 +85,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -99,7 +95,6 @@ REST_FRAMEWORK = {
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -108,8 +103,6 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'kollabauth.backends.GoogleOAuth2',
-    'social_core.backends.github.GithubOAuth2',
 ]
 
 WSGI_APPLICATION = 'kollabhunt_backend.wsgi.application'
@@ -168,16 +161,6 @@ SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
 }
 
-# SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_CLIENT_ID')
-# SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_CLIENT_SECRETS')
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_CLIENT_ID')
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_CLIENT_SECRETS')
-# socal auth
-# by default set random url
-# LOGIN_URL = 'login'
-# LOGOUT_URL = 'logout'
-# LOGIN_REDIRECT_URL = 'home'
-
 SOCIALACCOUNT_PROVIDERS = {
     "github_auth": {
         'adapter': 'kollabauth.adapters.KollabGithubOAuth2Adapter',
@@ -216,9 +199,3 @@ REST_AUTH = {
 }
 
 SOCIALACCOUNT_ADAPTER = 'kollabauth.adapters.KollabSocialAccountAdapter'
-
-
-
-
-
-
