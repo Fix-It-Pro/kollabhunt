@@ -13,6 +13,7 @@ from .adapters import KollabGoogleOAuth2Adapter, KollabGithubOAuth2Adapter
 import requests
 
 
+
 UserModel = get_user_model()
 
 
