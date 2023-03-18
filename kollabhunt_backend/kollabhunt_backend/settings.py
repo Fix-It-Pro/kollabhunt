@@ -37,12 +37,18 @@ ALLOWED_HOSTS = ['*']
 
 CUSTOM_APPS = [
     'kollabhunt.apps.DomainConfig',
+    'kollabauth.apps.KollabauthConfig',
 ]
 
 THIRD_PARTY_APP = [
     'drf_yasg',
-    'social_django',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration'
 ]
 
 INSTALLED_APPS = [
@@ -52,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ] + THIRD_PARTY_APP + CUSTOM_APPS
 
 MIDDLEWARE = [
@@ -62,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'kollabhunt_backend.urls'
@@ -77,6 +86,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -84,6 +96,7 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication'
@@ -95,7 +108,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.google.GoogleOAuth2',
+    'kollabauth.backends.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
 ]
 
@@ -148,19 +161,61 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'kollabhunt.User'
+USER_FIELDS=['email','firstname', 'lastname', 'username']
 
 # swagger
 SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
 }
 
+# SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_CLIENT_ID')
+# SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_CLIENT_SECRETS')
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_CLIENT_ID')
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_CLIENT_SECRETS')
 # socal auth
 # by default set random url
 # LOGIN_URL = 'login'
 # LOGOUT_URL = 'logout'
 # LOGIN_REDIRECT_URL = 'home'
 
+SOCIALACCOUNT_PROVIDERS = {
+    "github_auth": {
+        'adapter': 'kollabauth.adapters.KollabGithubOAuth2Adapter',
+        "APP": {
+            "client_id": os.environ.get('GITHUB_CLIENT_ID'),
+            "secret": os.environ.get('GITHUB_CLIENT_SECRETS'),
+            "key": ""
+        },
+        "SCOPE": [
+            "read:user",
+        ],
+        "VERIFIED_EMAIL": True
+    },
+    "google_auth": {
+        'adapter': 'kollabauth.adapters.KollabGoogleOAuth2Adapter',
+        "APP": {
+            "client_id": os.environ.get('GOOGLE_CLIENT_ID'),
+            "secret": os.environ.get('GOOGLE_CLIENT_SECRETS')
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "offline",
+        }
+    }
+}
 
+REST_AUTH_SOCIAL_LOGIN_PROVIDERS = {
+    'google': 'kollabauth.provider.KollabGoogleProvider',
+}
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_HTTPONLY': False
+}
+
+SOCIALACCOUNT_ADAPTER = 'kollabauth.adapters.KollabSocialAccountAdapter'
 
 
 
