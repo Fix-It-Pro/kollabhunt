@@ -15,6 +15,7 @@ import requests
 UserModel = get_user_model()
 
 
+
 class GoogleLogin(SocialLoginView):
     adapter_class = KollabGoogleOAuth2Adapter
     callback_url = 'http://127.0.0.1:8000/auth/callback/google/'
