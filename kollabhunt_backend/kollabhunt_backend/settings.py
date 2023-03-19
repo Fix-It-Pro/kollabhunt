@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['*']
 CUSTOM_APPS = [
     'kollabhunt.apps.DomainConfig',
     'kollabauth.apps.KollabauthConfig',
+    'kollabprofile.apps.KollabprofileConfig',
 ]
 
 THIRD_PARTY_APP = [
