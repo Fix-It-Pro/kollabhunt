@@ -20,4 +20,5 @@ from .swagger_urls import urlpatterns as swagger_urls_pattern
 urlpatterns = swagger_urls_pattern + [
     path('admin/', admin.site.urls),
     path('auth/', include('kollabauth.urls')),
+    path('project/', include('project.urls')),
 ]
