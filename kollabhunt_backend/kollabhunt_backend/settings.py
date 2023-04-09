@@ -70,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'kollabhunt.middlewares.global_request_middleware.GlobalRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'kollabhunt_backend.urls'
