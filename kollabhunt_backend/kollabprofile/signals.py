@@ -9,12 +9,19 @@ from allauth.socialaccount.models import SocialAccount
 @receiver(post_save, sender=User)
 def create_kollab_profile(sender, instance, created, **kwargs):
     if created:
-        extra_info = SocialAccount.objects.filter(instance.id)
-        extra_info = json.loads(extra_info.first().extra_data)
+        social_info = SocialAccount.objects.filter(instance.id)
+        extra_info = json.loads(social_info.first().extra_data)
         user_info = {
-            'user': instance,
-            'image': extra_info.avatar_url,
-            'bio': extra_info.bio
+            'user': instance
         }
+        if social_info.provider == 'github_auth':
+            user_info.update({
+                'image': extra_info.avatar_url,
+                'bio': extra_info.bio
+            })
+        elif social_info.provider == 'google_auth':
+            user_info.update({
+                'image': extra_info.picture
+            })
         KollabProfile.objects.create(**user_info)
         print("profile is created!")
