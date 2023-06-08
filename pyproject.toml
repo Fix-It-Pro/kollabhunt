@@ -27,6 +27,7 @@ drf-yasg = ">=1.21.5,<1.22.0"
 django-allauth = "0.53.0"
 dj-rest-auth = "3.0.0"
 kollabhunt-package = {path = "kollabhunt-package/dist/kollabhunt_package-0.1.0-py3-none-any.whl"}
+gunicorn = "^20.1.0"
 
 
 [build-system]
