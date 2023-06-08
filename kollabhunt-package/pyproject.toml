@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "kollabhunt-package"
+version = "0.1.0"
+description = ""
+authors = ["Shaffat-BS23 <Shaffat.Nur@brainstation-23.com>"]
+readme = "README.md"
+packages = [{include = "kollabhunt"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "4.1.6"
+asgiref = "3.6.0"
+backports-zoneinfo = "0.2.1"
+django-social-auth = "0.7.28"
+djangorestframework = "3.14.0"
+djangorestframework-simplejwt = "5.2.2"
+httplib2 = "0.21.0"
+oauth2 = "1.9.0.post1"
+psycopg2-binary = "2.9.5"
+pyjwt = "2.6.0"
+pyparsing = "3.0.9"
+python-dotenv = "0.21.1"
+python-openid = "2.2.5"
+pytz = "2022.7.1"
+sqlparse = "0.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
