@@ -1,0 +1,21 @@
+databases:
+  - name: kollabhunt
+    databaseName: kollabhunt
+    user: kollabhunt_user
+
+services:
+  - type: web
+    name: kollabhunt
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "cd kollabhunt_backend & gunicorn kollabhunt_backend.wsgi:application"
+    envVars:
+      - key: DATABASE
+        fromDatabase:
+            name: my-database-service
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: MODE
+        value: production

@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if "DEV" == os.environ.get("MODE") else False
 
 ALLOWED_HOSTS = ['*']
 
@@ -111,7 +111,12 @@ WSGI_APPLICATION = 'kollabhunt_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = json.loads(os.environ.get('DATABASE'))
+if "DEV" == os.environ.get("MODE"):
+    DATABASES = json.loads(os.environ.get('DATABASE'))
+else:
+    DATABASES = {
+        "default": json.loads(os.environ.get('DATABASE'))
+    }
 
 
 # Password validation
@@ -149,6 +154,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
