@@ -115,7 +115,14 @@ if "DEV" == os.environ.get("MODE"):
     DATABASES = json.loads(os.environ.get('DATABASE'))
 else:
     DATABASES = {
-        "default": json.loads(os.environ.get('DATABASE'))
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": json.loads(os.environ.get('DATABASE_NAME')),
+            "USER": json.loads(os.environ.get('DATABASE_USER')),
+            "PASSWORD": json.loads(os.environ.get('DATABASE_PASSWORD')),
+            "HOST": json.loads(os.environ.get('DATABASE_HOST')),
+            "PORT": json.loads(os.environ.get('DATABASE_PORT'))
+        }
     }
 
 
