@@ -10,9 +10,26 @@ services:
     buildCommand: "./build.sh"
     startCommand: "cd kollabhunt_backend & gunicorn kollabhunt_backend.wsgi:application"
     envVars:
-      - key: DATABASE
+      - key: DATABASE_NAME
         fromDatabase:
             name: my-database-service
+            property: database
+      - key: DATABASE_USER
+        fromDatabase:
+          name: my-database-service
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: my-database-service
+          property: password
+      - key: DATABASE_HOST
+        fromDatabase:
+          name: my-database-service
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: my-database-service
+          property: port
       - key: SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
