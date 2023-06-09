@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
-python -m pip install --upgrade pip setuptools
+pip install --upgrade poetry==1.5.1
 poetry_version=$(poetry --version)
 echo "Poetry version: $poetry_version"
 poetry install
