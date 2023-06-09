@@ -13,9 +13,19 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-BASE_DIR = Path(__file__).resolve().parent.parent
-env_file_path = os.path.join(BASE_DIR, '.env')
-load_dotenv(dotenv_path=env_file_path)
+try:
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    env_file_path = os.path.join(BASE_DIR, '.env')
+    load_dotenv(dotenv_path=env_file_path)
+except Exception as e:
+    pass
+
+try:
+    BASE_DIR2 = Path(__file__).resolve().parent.parent.parent
+    env_file_path = os.path.join(BASE_DIR2, '.env')
+    load_dotenv(dotenv_path=env_file_path)
+except Exception as e:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
